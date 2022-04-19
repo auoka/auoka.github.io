@@ -1,77 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">	
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap" rel="stylesheet">
-	<script src="https://d3js.org/d3.v5.min.js"></script>
-	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-	<script src="https://d3js.org/d3-geo-projection.v3.min.js"></script>
-	<style>
-			body {
-				font-family: 'Work Sans', sans-serif;
-				font-size: 12px;
-			}
-					
-			#map {
-				display: inline-block;
-			}
-			
-			#sidebar {
-				vertical-align:top;
-				display: inline-block;
-				width:240px;
-				height:650px;
-				padding-left: 30px;				
-			}
-			
-			#title {
-				vertical-align:top;
-				display: inline-block;
-				width:240px;
-				height:380px;
-				font-family: 'Work Sans', sans-serif;
-				font-size: 24px;				
-			}
-			
-			#selector {
-				width: 240px;
-				height:250px;
-				display: inline-block;
-			}
-			
-			#variant {
-				height:50px;
-				width:250px;
-				font-size: 18px;
-				text-align: center;
-				margin: 10px;
-				margin-left: 0px;
-				background-color: lightgrey;
-				line-height: 50px;
-				color: white;
-			}
-	</style>
+    <meta charset="utf-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap" rel="stylesheet">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v3.min.js"></script>
+    <style>
+            body {
+                font-family: 'Work Sans', sans-serif;
+                font-size: 12px;
+            }
+
+            #map {
+                display: inline-block;
+            }
+
+            #sidebar {
+                vertical-align:top;
+                display: inline-block;
+                width:240px;
+                height:650px;
+                padding-left: 30px;
+            }
+
+            #title {
+                vertical-align:top;
+                display: inline-block;
+                width:240px;
+                height:380px;
+                font-family: 'Work Sans', sans-serif;
+                font-size: 24px;
+            }
+
+            #selector {
+                width: 240px;
+                height:250px;
+                display: inline-block;
+            }
+
+            #variant {
+                height:50px;
+                width:250px;
+                font-size: 18px;
+                text-align: center;
+                margin: 10px;
+                margin-left: 0px;
+                background-color: lightgrey;
+                line-height: 50px;
+                color: white;
+            }
+    </style>
 </head>
 
 <body>
-	<div id="wrapper">
-		<div id="tooltip"></div>
-		<svg id="map" width="960" height="650"></svg>
-		<script src="map.js"></script>
-		<div id="sidebar">
-			<div id="title">
-				<h2> MAPPING THE FIRST OCCURENCE OF CORONAVIRUS
-					VARIANTS IN EACH COUNTRY </h2>
-			</div>
-			<div id="selector">
-				<div id="variant">alpha</div>
-				<div id="variant">beta</div>
-				<div id="variant" style="background-color: #6daed5;">delta</div>
-				<div id="variant">omicron</div>
-			</div>
-		</div>
-	</div>
+    <div id="wrapper">
+        <div id="tooltip"></div>
+        <svg id="map" width="960" height="650"></svg>
+        <script src="map.js"></script>
+        <div id="sidebar">
+            <div id="title">
+                <h2>
+                    MAPPING THE FIRST OCCURENCE OF CORONAVIRUS
+                    VARIANTS IN EACH COUNTRY
+                </h2>
+            </div>
+            <div id="selector">
+                <div id="variant">alpha</div>
+                <div id="variant">beta</div>
+                <div id="variant" style="background-color: #6daed5;">delta</div>
+                <div id="variant">omicron</div>
+            </div>
+        </div>
+    </div>
+    <div style="width: 960px;">
+        <p>
+            This choropleth map shows the first occurrence of a COVID-19 variant for each country. The darker the fill colour, the earlier the given strain was detected. A country can be hovered over to display a tooltip that shows the exact date. Data is not available for all countries - these countries use a white fill, and the tooltip displays N/A.
+            <br><br>
+            The map is created from GeoJSON data, projected using the Mercator projection. The data is pulled from a CSV file with the country name, code, and relevant date. This is read into the code as a Unix timestamp. The timestamp is reformatted into a string for the tooltip. For the fill colour, the timestamp is formatted into a JavaScript Date object to be scaled (scaleTime()) into a number between 0 and 1, which is then scaled (scaleSequential()) into a colour.
+        </p>
+        <p>
+            Source: Nextstrain.org
+        </p>
+    </div>
 </body>
 </html>
